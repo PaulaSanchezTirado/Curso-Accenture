@@ -43,7 +43,4 @@ public class Productos {
 	public void setNumeroLote(String numeroLote) {
 		this.numeroLote = numeroLote;
 	}
-	
-	
-
 }
