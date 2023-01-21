@@ -1,2 +1,3 @@
+Bastante correcto
 No acabo de entender porque los constructores tienen algunos datos, y otros (los comunes) los tienes que meter con setters
 La impresion, podria ser hecha desde cada clase, mejorando su encapsulacion
