@@ -1,0 +1,3 @@
+No utilizas los campos de herencia
+El metodo dibujar esta escrito en el padre, que luego no se utiliza, porque cada hijo lo tiene sobreescrito
+Supongo que lo hiciste, porque la base y la altura, el padre no la tiene, porque estas sobreescribiendo los campos en cada hijo
