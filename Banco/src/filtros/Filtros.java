@@ -5,6 +5,8 @@ package filtros;
  */
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Filtros {
 	
@@ -25,5 +27,26 @@ public class Filtros {
 		
 	}
 	
+	public static LocalDate fechaCorrecta(String fecha) throws Exception {
+		return fechaCorrecta(fecha, "dd-MM-yyyy");
+	}
+	
+	public static LocalDate fechaCorrecta(String fecha, String formato) throws Exception {
+		
+		DateTimeFormatter format = DateTimeFormatter.ofPattern(formato);
+		
+		try {
+			LocalDate fech = (LocalDate.parse(fecha, format));	
+			if(fech.toString().isEmpty()) {
+				return fech;	
+		
+			}
+		}
+		catch (DateTimeParseException e){
+			throw new Exception("Error en la fecha");
+		}
+		
+		return null;
+	}
 	
 }
