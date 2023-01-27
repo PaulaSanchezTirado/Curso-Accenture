@@ -7,6 +7,8 @@ package proyectoBanco;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import excepciones.ExcepcionNumeroNegativo;
 import excepciones.ExcepcionSinCredito;
@@ -89,7 +91,7 @@ public class Credito extends Tarjeta{
 	 * @param mes
 	 * @param year
 	 */
-	
+	/*
 	public void liquidar(int mes, int year) {
 		Movimiento liquidacion = new Movimiento();
 		liquidacion.setmConcepto("Liquidación del"+mes+"/"+year);
@@ -101,6 +103,28 @@ public class Credito extends Tarjeta{
 				it.remove();
 			}
 		}
+		liquidacion.setmImporte(r);
+		getmCuenta().addMovimiento(liquidacion);
+	}
+	*/
+	
+	/**
+	 * Método liquidación hecho con stream
+	 * @param mes
+	 * @param year
+	 */
+	public void liquidar(int mes, int year) {
+		Movimiento liquidacion = new Movimiento();
+		liquidacion.setmConcepto("Liquidación del"+mes+"/"+year);
+		double r = 0;
+		r = mMovimiento.stream()
+				.filter(movimiento->movimiento.getmFecha().getMonthValue() == mes && movimiento.getmFecha().getYear() == year)
+				.map(movimiento->movimiento.getmImporte())
+				.reduce(0d, (subtotal, element)->subtotal+element);
+		mMovimiento = new ArrayList<Movimiento>(mMovimiento.stream()
+				.filter(movimiento->!(movimiento.getmFecha().getMonthValue() == mes && movimiento.getmFecha().getYear() == year))
+				.collect(Collectors.toList()));
+		
 		liquidacion.setmImporte(r);
 		getmCuenta().addMovimiento(liquidacion);
 	}

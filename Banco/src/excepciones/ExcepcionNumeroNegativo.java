@@ -1,5 +1,9 @@
 package excepciones;
 
+/**
+ * Excepciones para ejercicio Banco
+ */
+
 public class ExcepcionNumeroNegativo extends Exception{
 
 	public ExcepcionNumeroNegativo() {

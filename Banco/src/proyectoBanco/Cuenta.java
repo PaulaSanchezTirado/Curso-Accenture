@@ -5,6 +5,7 @@ package proyectoBanco;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import excepciones.ExcepcionNumeroNegativo;
 import excepciones.ExcepcionSaldo;
@@ -17,7 +18,7 @@ public class Cuenta {
 	 * Esta clase genera la cuenta del usuario y guarda los movimientos que se hacen en ella
 	 */
 	
-	final int TITULAR_MIN = 20;
+	final int TITULAR_MIN = 15;
 	final int TITULAR_MAX = 40;
 	final int CONCEPTO_MIN = 5;
 	final int CONCEPTO_MAX = 100;
@@ -84,6 +85,16 @@ public class Cuenta {
 		for (Movimiento movimiento:mMovimientos) {
 				saldo+=movimiento.getmImporte(); // Dan positivos y negativos
 		}
+		
+		/*
+		 * getSaldo con Stream
+		 * saldo = mMovimientos.stream()
+		 * 			     .map(mov->mov.getmImporte())
+		 * 				 .reduce(0d, (subtotal, element)->subtotal+element);
+		 * 
+		 * No se puede acceder a subtotal y a element desde fuera.
+		 * El valor inicial de reduce es con el que empiezo
+		 */
 		
 		return saldo;		
 	}
