@@ -21,26 +21,64 @@ public class ValidatorTest {
 	 */
 	
 	final String NUMBER1 = "7483920 384758";
+	final String NUMBER2 = "333";
+	final String NUMBER3 = "867392045626248012345";
+	final String NUMBER4 = "722636309 w";
+	
 	final int VALOR_MIN = 4;
 	final int VALOR = 6;
 	final int VALOR_MAX = 10;
 	final double VALOR_MAL_INFERIOR = 2;
 	final double VALOR_MAL_SUPERIOR = 11; 
+	
 	final String TEXTO1 = "12345678";
 	final String TEXTO2 = "123";
 	final String TEXTO3 = "12345678910";
+	
 	final LocalDate FECHA1 = LocalDate.of(2023, 02, 12);
 	final LocalDate FECHA2 = LocalDate.of(2020, 02, 12);
-	final String FECHA_STRING_CORRECTA = "12-02-2023";
-	final String PASSWORD_VALIDA = "letra1-A%";
-	final String DNI_VALIDO = "77.391.895-T";
 	
+	final String FECHA_STRING_CORRECTA = "12/02/2023";
+	final String FECHA_STRING_INCORRECTA1 = "12/12";
+	final String FECHA_STRING_INCORRECTA2 = "02/2023";
+	final String FECHA_STRING_INCORRECTA3 = "aa/bb/cc";
+	final String FECHA_STRING_INCORRECTA4 = "12122023";
+	final String FECHA_STRING_INCORRECTA5 = "12/12/23";
+	final String FECHA_STRING_INCORRECTA6 = "12-12-2023";
+	
+	final String PASSWORD_VALIDA = "letra1-A%";
+	final String PASSWORD_INVALIDA1 = "23456";
+	final String PASSWORD_INVALIDA2 = "stexto4%";
+	final String PASSWORD_INVALIDA3 = "texto1-";
+	final String PASSWORD_INVALIDA4 = "AAAAAAA%-";
+	
+	final String DNI_VALIDO = "77.391.895-T";
+	final String DNI_INVALIDO1 =  "77391895-T";
+	final String DNI_INVALIDO2 = "77.391.895T";
+	final String DNI_INVALIDO3 = "77.391.895-A";
+	
+	final String ALFANUMERICO1 = "23456";
+	final String ALFANUMERICO2 = "srttf4";
+	final String ALFANUMERICO3 = "fjturi";
+	final String ALFANUMERICO4 = "{{{";
+	final String ALFANUMERICO5 = "--f";
+	final String ALFANUMERICO6 = ".6";
+	
+	final String CORREO1 = "texto1@texto2.es";
+	final String CORREO2 = "texto1@teXto2.com";
+	final String CORREO3 = "texto1_texto2@texto3.com";
+	final String CORREO4 = "tex@to1@texto2.es";
+	final String CORREO5 = "texto1@texto2";
+	final String CORREO6 = "-texto1@texto2.com";
+	final String CORREO7 = "@texto2.com";
+	final String CORREO8 = "t@t2.c";
+
 	/**
 	 * Comprueba que el texto introducido es alfanumérico
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"23456", "srttf4", "fjturi"})
+	@ValueSource(strings = {ALFANUMERICO1, ALFANUMERICO2, ALFANUMERICO3})
 	void testIsAlfanumericCorrecto(String param){
 		assertTrue(Validator.isAlfanumeric(param));
 	}
@@ -50,7 +88,7 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"{{{", "--f", ".6"})
+	@ValueSource(strings = {ALFANUMERICO4, ALFANUMERICO5, ALFANUMERICO6})
 	void testIsAlfanumericIncorrecto(String param){
 		assertFalse(Validator.isAlfanumeric(param));
 	}
@@ -68,7 +106,7 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"333", "867392045626248012345", "722636309 w"})
+	@ValueSource(strings = {NUMBER2, NUMBER3, NUMBER4})
 	void testCumplePhoneNumberIncorrecto(String param){
 		assertFalse(Validator.cumplePhoneNumber(param));
 	}
@@ -78,7 +116,7 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"texto1@texto2.es", "texto1@teXto2.com", "texto1_texto2@texto3.com"})
+	@ValueSource(strings = {CORREO1, CORREO2, CORREO3})
 	void testIsEmailValidoCorrecto(String param) {
 		assertTrue(Validator.isEmailValido(param));
 	}
@@ -96,7 +134,7 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"77391895-T", "77.391.895T", "77.391.895-A"})
+	@ValueSource(strings = {DNI_INVALIDO1, DNI_INVALIDO2, DNI_INVALIDO3})
 	void testCumpleDNIIncorrecto(String param) {
 		assertFalse(Validator.cumpleDNI(param));
 	}
@@ -106,7 +144,7 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"tex@to1@texto2.es", "texto1@texto2", "-texto1@texto2.com", "@texto2.com", "t@t2.c"})
+	@ValueSource(strings = {CORREO4, CORREO5, CORREO6, CORREO7, CORREO8})
 	void testIsEmailValidoInCorrecto(String param){
 		assertFalse(Validator.cumplePhoneNumber(param));
 	}
@@ -238,7 +276,8 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"12-12", "02-2023", "aa-bb-cc", "12122023", "12-12-23", "12/12/2023"})
+	@ValueSource(strings = {FECHA_STRING_INCORRECTA1, FECHA_STRING_INCORRECTA2, FECHA_STRING_INCORRECTA3, FECHA_STRING_INCORRECTA4,
+			FECHA_STRING_INCORRECTA5, FECHA_STRING_INCORRECTA6})
 	void testEsFechaValidaIncorrecta(String param){
 		assertFalse(Validator.esFechaValida(param));
 	}
@@ -256,8 +295,8 @@ public class ValidatorTest {
 	 * @param param
 	 */
 	@ParameterizedTest
-	@ValueSource(strings = {"23456", "stexto4%", "texto1-", "AAAAAAA%-"})
-	void testEsPasswordValidaCorrecta(String param){
+	@ValueSource(strings = {PASSWORD_INVALIDA1, PASSWORD_INVALIDA2, PASSWORD_INVALIDA3, PASSWORD_INVALIDA4})
+	void testEsPasswordValidaIncorrecta(String param){
 		assertFalse(Validator.esPasswordValida(param));
 	}
 }
