@@ -73,7 +73,7 @@ public class Filtros {
 		// Para que lance un error cuando el formato de la fecha es erróneo, utilizamos try-catch
 		try {
 			LocalDate fech = (LocalDate.parse(fecha, format)); // Parsea el string fecha con el formato indicado 
-			if(!fech.toString().isEmpty()) { // Si no está vacío, devuelve la fecha (fech == null)
+			if(!fech.toString().isEmpty()) { // Si no está vacío, devuelve la fecha
 				return fech;	
 		
 			}

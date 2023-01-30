@@ -21,9 +21,11 @@ class FiltrosTest {
 	final String TITULAR1 = "Titulo de prueba";
 	final String TITULAR2 = "Titu";
 	final String TITULAR3 = "";
+	
 	final LocalDate FECHA1 = LocalDate.of(2026, 02, 25);
 	final LocalDate FECHA2 = LocalDate.of(2020, 02, 25);
 	final LocalDate FECHA3 = LocalDate.of(2030, 02, 25);
+	
 	final String FECHA4 = "21-12-2023";
 	final String FECHA5 = "12/01/2023";
 	
